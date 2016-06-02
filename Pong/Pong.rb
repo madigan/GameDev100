@@ -196,10 +196,10 @@ class PlayerPaddle < GameObject
     end
     
     def update( step ) 
-	    if @world.button_down?(Gosu::KbDown) or @world.button_down?(Gosu::KbW) then
-	        @y -= @speed * step
-	    elsif @world.button_down?(Gosu::KbUp) or @world.button_down?(Gosu::KbS) then
+	    if @world.button_down?(Gosu::KbDown) or @world.button_down?(Gosu::KbS) then
 	        @y += @speed * step
+	    elsif @world.button_down?(Gosu::KbUp) or @world.button_down?(Gosu::KbW) then
+	        @y -= @speed * step
 	    end
     end
     
