@@ -93,6 +93,10 @@ class GameObject
         @image.draw( @x, @y, 0 )
     end
     
+    def reset
+        @y = @world.height / 2 - width / 2
+    end
+    
     def width
         return @image.width
     end
@@ -126,28 +130,20 @@ class Ball < GameObject
         end
         
         # Handle paddle collisions. These are fairly simple (only handles x-axis)
-        if  overlaps?(
-                @world.player_paddle.x, 
-                @world.player_paddle.y, 
-                @world.player_paddle.width, 
-                @world.player_paddle.height) or
-            overlaps?(
-                @world.computer_paddle.x, 
-                @world.computer_paddle.y, 
-                @world.computer_paddle.width, 
-                @world.computer_paddle.height) then
+        if  overlaps?( @world.player_paddle ) or
+            overlaps?( @world.computer_paddle ) then
             # Simple bounce which will serve our purposes.
             @v_x *= -1
             @bounce_sfx.play
         end
     end
     
-    def overlaps?(x, y, w, h)
+    def overlaps?(go)
         # Basic "Overlapping Rectangle" Check
-        if  @x + width > x and
-            @x < x + w and
-            @y + height > y and
-            @y < y + h then
+        if  @x + width > go.x and
+            @x < go.x + go.width and
+            @y + height > go.y and
+            @y < go.y + go.height then
             # Now we *should* check for "corner cases"... heh...
             return true
         else
@@ -156,8 +152,8 @@ class Ball < GameObject
     end
 	
     def reset
+        super
         @x = @world.width / 2 - width / 2
-        @y = @world.height / 2 - width / 2
         angle = 45 + rand(15)
         @v_x = Math.cos(angle)
         @v_y = Math.sin(angle)
@@ -183,10 +179,6 @@ class ComputerPaddle < GameObject
 	        @y -= @speed * step
 	    end
     end
-    
-    def reset
-        @y = @world.height / 2 - @image.height / 2
-    end
 end
 
 class PlayerPaddle < GameObject
@@ -201,10 +193,6 @@ class PlayerPaddle < GameObject
 	    elsif @world.button_down?(Gosu::KbUp) or @world.button_down?(Gosu::KbW) then
 	        @y -= @speed * step
 	    end
-    end
-    
-    def reset
-        @y = @world.height / 2 - height / 2
     end
 end
 
