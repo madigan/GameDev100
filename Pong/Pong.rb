@@ -158,7 +158,6 @@ class Ball < GameObject
     def reset
         @x = @world.width / 2 - width / 2
         @y = @world.height / 2 - width / 2
-        @speed = 16 + rand(32)
         angle = 45 + rand(15)
         @v_x = Math.cos(angle)
         @v_y = Math.sin(angle)
