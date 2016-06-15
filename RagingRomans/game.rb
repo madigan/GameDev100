@@ -5,17 +5,21 @@ require './Gaul.rb'
 class RagingRomansGame < Gosu::Window
   WINDOW_WIDTH = 640
   WINDOW_HEIGHT = 480
+  GAUL_SPEED = 100
   
   def initialize
     super WINDOW_WIDTH, WINDOW_HEIGHT
     self.caption = "Raging Romans"
     
     # Load Resources
-    gaul_image = Gosu::Image.new("assets/gaul.png")
+    gaul_image = Gosu::Image.new("assets/Gaul.png")
 
     # Create Game Objects
     @game_objects = Hash.new 
-    @game_objects[:gaul] = Gaul.new(gaul_image, WINDOW_WIDTH / 2 - gaul_image.width / 2, WINDOW_HEIGHT - gaul_image.height, 0)
+    @game_objects[:gaul] = Gaul.new(
+        gaul_image, WINDOW_WIDTH / 2 - gaul_image.width / 2, 
+        WINDOW_HEIGHT - gaul_image.height, 
+        GAUL_SPEED)
   end
   
   def update
