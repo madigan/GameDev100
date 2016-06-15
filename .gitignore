@@ -37,3 +37,7 @@ build/
 
 # handle linux-specific files
 *~
+
+# handle Aptana files
+.metadata
+.project
