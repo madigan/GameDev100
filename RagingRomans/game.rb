@@ -24,7 +24,7 @@ class RagingRomansGame < Gosu::Window
   
   def update
     step = self.update_interval / 1000
-    @game_objects.each_value {|obj| obj.update( step )}
+    @game_objects.each_value {|obj| obj.update( self, step )}
   end
 
   def draw
@@ -32,7 +32,7 @@ class RagingRomansGame < Gosu::Window
   end
   
   def reset
-    @game_objects.each_value {|obj| obj.reset( )}
+    @game_objects.each_value {|obj| obj.reset( self )}
   end
 end
 

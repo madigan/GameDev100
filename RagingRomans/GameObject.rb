@@ -14,11 +14,11 @@ class GameObject
         @image.draw( @x, @y, 0 )
     end
     
-    def update( step )
+    def update( world, step )
       
     end
     
-    def reset
+    def reset( world )
       
     end
     
